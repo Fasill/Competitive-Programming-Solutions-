@@ -1,23 +1,20 @@
-
 class Solution:
     def longestSubarray(self, nums: List[int]) -> int:
-        n = len(nums)
-        l =0
-        r = 0
-        _max = 0
-        z = 1
+        zeroCounter = 0
+        left = 0
+        arrayLength = len(nums)
+        longestArray = 0
 
-        while r < n:
-            if nums[r] == 0:
-                z -= 1
-
-            while z < 0:
-                if nums[l] == 0:
-                    z += 1
-                l += 1
+        for right in range(arrayLength):
+            if nums[right] == 0:
+                zeroCounter+=1
                 
+            while zeroCounter >1:
+                if nums[left] == 0:
+                    zeroCounter-=1
+                left += 1
+            longestArray = max(longestArray,(right-left))
 
-            _max = max(_max, r - l )
-            r += 1
+        return longestArray            
 
-        return _max  
+
