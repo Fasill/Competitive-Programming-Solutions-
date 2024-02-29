@@ -10,16 +10,16 @@ class Solution:
         li = []
         def ancestor(node1,p,q):
             if p.val == node1.val:
-                li.append(p.val)
+                li.append(p)
                 return
             if q.val == node1.val:
-                li.append(q.val)
+                li.append(q)
                 return
             if  p.val < node1.val and q.val > node1.val:
-                li.append( node1.val)
+                li.append( node1)
                 
                 return 
-            li.append( node1.val)
+            li.append( node1)
             
             if p.val < node1.val and q.val < node1.val:
                 return ancestor(node1.left,p,q)
@@ -28,5 +28,5 @@ class Solution:
                 return ancestor(node1.right,p,q)
 
         ancestor(root,p,q)
-        return TreeNode(li[-1])
+        return li[-1]
         
