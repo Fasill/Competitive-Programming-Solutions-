@@ -1,25 +1,30 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-            if not height:
-                return 0
 
-         
-            l, r = 0, len(height) - 1
-            ans = 0
-            max_l = height[l]
-            max_r = height[r]
-            while l < r:
-                if max_l <= max_r:
-                    if max_l - height[l] > 0:
-                        ans += max_l - height[l]
-                    l += 1
-                else:
-                    if max_r - height[r] > 0:
-                        ans += max_r - height[r]
-                    r -= 1
+        moStack1 = []
+        moStack2 = []
 
-                if max_l < height[l]:
-                    max_l = height[l]
-                if max_r < height[r]:
-                    max_r = height[r]
-            return ans
+        n = len(height)
+
+        for i in range(n):
+            if not moStack1 or moStack1[-1]<height[i]:
+                moStack1.append(height[i])
+            else:
+                moStack1.append(moStack1[-1])
+                
+            if not moStack2 or moStack2[-1]<height[-(i+1)]:
+                moStack2.append(height[-(i+1)])
+            else:
+                moStack2.append(moStack2[-1])
+
+        moStack2 = moStack2[::-1]   
+        ans = 0
+
+        for i in range(n):
+            diff = min(moStack2[i],moStack1[i]) - height[i]
+            if diff>=0:
+                ans += diff
+
+        return ans
+
+            
