@@ -1,0 +1,17 @@
+# Problem: Two Sum - https://leetcode.com/problems/two-sum/
+
+class Solution {
+  List<int> twoSum(List<int> nums, int target) {
+    var image = {};
+    var l = nums.length;
+
+    for (int i = 0; i < l; i++){
+        var comp = target - nums[i];
+        if (image.containsKey(comp) ){
+            return [image[comp], i];
+        };
+        image[nums[i]] = i;
+    }
+    return [];
+  }
+}
